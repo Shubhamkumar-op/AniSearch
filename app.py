@@ -23,14 +23,14 @@ def recommend(anime):
 
     distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
     recommended_anime_names = []
-    recommended_anime_summery = []
+    recommended_anime_summary = []
     recommended_anime_tags = []
     for i in distances[1:6]:
         recommended_anime_names.append(animes.iloc[i[0]].Name)
-        recommended_anime_summery.append(animes.iloc[i[0]].Synopsis)
+        recommended_anime_summary.append(animes.iloc[i[0]].Synopsis)
         recommended_anime_tags.append(animes.iloc[i[0]].Tags)
 
-    return recommended_anime_names, recommended_anime_summery, recommended_anime_tags
+    return recommended_anime_names, recommended_anime_summary, recommended_anime_tags
 
 def main():
     st.set_page_config(page_title="Anime Recommender", layout="wide")
@@ -88,14 +88,14 @@ def main():
         st.info("Please select an anime from the list.")
     elif selected_anime and st.button('Recommend'):
         with st.spinner('Finding recommendations...'):
-            recommendations, summery, tags = recommend(selected_anime)
+            recommendations, summary, tags = recommend(selected_anime)
             st.success('Recommendations ready!')
 
             for i in range(len(recommendations)):
                 st.markdown(f"""
                 <div class="recommendation-card">
                     <h3 style="color: #ff6f61;">{i + 1}. {recommendations[i]}</h3>
-                    <p><strong>Summary:</strong> {summery[i]}</p>
+                    <p><strong>Summary:</strong> {summary[i]}</p>
                     <p><strong>Tags:</strong> {tags[i]}</p>
                 </div>
                 """, unsafe_allow_html=True)
