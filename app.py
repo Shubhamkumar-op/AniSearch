@@ -14,7 +14,7 @@ def recommend(anime):
     if anime == "Search anime":
         return [], [], []
 
-    similarity = pickle.load(open('models/model.pkl', 'rb'))
+    similarity = pickle.load(open('model.pkl', 'rb'))
     try:
         index = animes[animes["Name"] == anime]["index"].values[0]
     except IndexError:
